@@ -1,21 +1,165 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>เข้าสู่โลกของเรา</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Happy 2nd Anniversary</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffdee9, #b5fffc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: rgb(255, 255, 255);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      padding: 30px;
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      align-items: center;
+      max-width: 800px;
+      width: 27%;
+    }
+
+    .photo {
+      width: 250px;
+      height: 250px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lock-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .display {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      letter-spacing: 10px;
+      color: #ff66a3;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      gap: 15px;
+    }
+
+    .buttons button {
+      font-size: 1.5rem;
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #ff3385;
+    }
+
+    .enter-btn {
+      margin-top: 20px;
+      background: #ff3399;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 1rem;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .enter-btn:hover {
+      background: #cc287a;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .photo {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- พื้นหลังรูปแฟน -->
-  <div class="bg-image"></div>
 
-  <!-- กล่องตรงกลาง -->
-  <div class="center-box">
-    <h2>ใส่รหัสวันครบรอบของเรา 💘</h2>
-    <input type="text" id="codeInput" placeholder="ใส่รหัสวันครบรอบของเรา">
-    <button onclick="checkCode()">เข้าสู่โลกของเรา</button>
+<div class="container">
+  <div class="photo">
+    <img src="assets/images/couple.jpg" alt="Anniversary Photo">
   </div>
 
-  <script src="assets/js/script.js"></script>
+  <div class="lock-panel">
+    <div id="passwordDisplay" class="display">●●●●●●</div>
+
+    <div class="buttons">
+      <button onclick="press(1)">1</button>
+      <button onclick="press(2)">2</button>
+      <button onclick="press(3)">3</button>
+      <button onclick="press(4)">4</button>
+      <button onclick="press(5)">5</button>
+      <button onclick="press(6)">6</button>
+      <button onclick="press(7)">7</button>
+      <button onclick="press(8)">8</button>
+      <button onclick="press(9)">9</button>
+      <button onclick="erase()">←</button>
+      <button onclick="press(0)">0</button>
+      <button onclick="checkPassword()">✔️</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let password = "";
+  const correctPassword = "050368";
+
+  function press(num) {
+    if (password.length < 6) {
+      password += num;
+      updateDisplay();
+    }
+  }
+
+  function erase() {
+    password = password.slice(0, -1);
+    updateDisplay();
+  }
+
+  function updateDisplay() {
+    const dots = "●".repeat(password.length) + "○".repeat(6 - password.length);
+    document.getElementById("passwordDisplay").innerText = dots;
+  }
+
+  function checkPassword() {
+    if (password === correctPassword) {
+      window.location.href = "surprise.html"; // ลิงก์ไปยังหน้าเซอร์ไพรส์
+    } else {
+      alert("รหัสไม่ถูกต้อง ลองอีกครั้งนะ 💗");
+      password = "";
+      updateDisplay();
+    }
+  }
+</script>
+
 </body>
 </html>
